@@ -1,7 +1,7 @@
-import axios from "axios";
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { toast } from "react-toastify";
+import api from "../Services/api"
 
 const FormContainer = styled.form`
   display: flex;
@@ -68,8 +68,8 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
     }
 
     if (onEdit) {
-      await axios
-        .put("http://localhost:8800/" + onEdit.id, {
+      await api
+        .put("/" + onEdit.id, {
           nome: user.nome.value,
           email: user.email.value,
           fone: user.fone.value,
@@ -78,8 +78,8 @@ const Form = ({ getUsers, onEdit, setOnEdit }) => {
         .then(({ data }) => toast.success(data))
         .catch(({ data }) => toast.error(data));
     } else {
-      await axios
-        .post("http://localhost:8800", {
+      await api
+        .post("/", {
           nome: user.nome.value,
           email: user.email.value,
           fone: user.fone.value,
